@@ -1,4 +1,4 @@
-#include "transfer_param.ligo"
+#include "transfer/transfer_param.ligo"
 
 type action is
 (* Our simplified implementation only supports the Transfer entrypoint *)

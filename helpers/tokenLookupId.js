@@ -1,0 +1,1 @@
+module.exports.getTokenLookupId = (token_id, token_owner) => [token_id, token_owner];

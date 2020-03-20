@@ -1,6 +1,6 @@
-#include "../partials/tzip_12_tutorial/action.ligo"
-#include "../partials/tzip_12_tutorial/storage.ligo"
-#include "../partials/tzip_12_tutorial/transfer.ligo"
+#include "../../partials/tzip_12/action.ligo"
+#include "../../partials/tzip_12/storage/storage.ligo"
+#include "../../partials/tzip_12/transfer/transfer.ligo"
 
 (* Default function that represents our contract, it's sole purpose here is the entrypoint routing *)
 function main (const action : action; var storage : storage) : (list(operation) * storage)

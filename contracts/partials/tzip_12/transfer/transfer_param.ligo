@@ -1,6 +1,4 @@
-#include "storage.ligo"
-
-type token_id is nat;
+#include "../storage/storage.ligo"
 
 type transfer is record
     token_id : token_id;
@@ -9,4 +7,4 @@ type transfer is record
     to_ : token_owner;
 end;
 
-type transfer_param is list(transfer)
+type transfer_param is list(transfer);

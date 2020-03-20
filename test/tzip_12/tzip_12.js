@@ -1,33 +1,29 @@
-const tzip_12_tutorial = artifacts.require('tzip_12_tutorial');
+const tzip_12 = artifacts.require('tzip_12');
 
-const { initial_storage } = require('../migrations/1_deploy_tzip_12_tutorial.js');
-const bigMapKeyNotFound = require('./../helpers/bigMapKeyNotFound.js');
-const constants = require('./../helpers/constants.js');
-/**
- * For testing on a babylonnet (testnet), instead of the sandbox network,
- * make sure to replace the keys for alice/bob accordingly.
- */
-const { alice, bob } = require('./../scripts/sandbox/accounts');
+const { initialStorage, tokenLookupIdAlice, tokenLookupIdBob, tokenId, tokenBalance } = require('../../migrations/development/tzip_12');
+const bigMapKeyNotFound = require('../../helpers/bigMapKeyNotFound.js');
+const constants = require('../../helpers/constants.js');
+const { alice, bob } = require('../../scripts/sandbox/accounts');
 
-contract('tzip_12_tutorial', accounts => {
+contract('tzip_12', accounts => {
     let storage;
-    let tzip_12_tutorial_instance;
+    let tzip_12_instance;
 
     before(async () => {
-        tzip_12_tutorial_instance = await tzip_12_tutorial.deployed();
+        tzip_12_instance = await tzip_12.deployed();
         /**
          * Display the current contract address for debugging purposes
          */
-        console.log('Contract deployed at:', tzip_12_tutorial_instance.address);
-        storage = await tzip_12_tutorial_instance.storage();
+        console.log('Contract deployed at:', tzip_12_instance.address);
+        storage = await tzip_12_instance.storage();
     });
 
-    const expectedBalanceAlice = initial_storage.get(alice.pkh);
+    const expectedBalanceAlice = initialStorage.get(tokenLookupIdAlice);        
     it(`should store a balance of ${expectedBalanceAlice} for Alice`, async () => {
         /**
-         * Get balance for Alice from the smart contract's storage (by a big map key)
+         * Get balance for Alice from the smart contract's storage (by a big map lookup id)
          */
-        const deployedBalanceAlice = await storage.get(alice.pkh);
+        const deployedBalanceAlice = await storage.get(tokenLookupIdAlice);
         assert.equal(expectedBalanceAlice, deployedBalanceAlice);
     });
 
@@ -38,7 +34,7 @@ contract('tzip_12_tutorial', accounts => {
             /**
              * If a big map key does not exist in the storage, the RPC returns a 404 HttpResponseError
              */
-            await storage.get(bob.pkh);
+            await storage.get(tokenLookupIdBob);
         } catch (e) {
             fetchBalanceError = e;
         }
@@ -62,11 +58,11 @@ contract('tzip_12_tutorial', accounts => {
         /**
          * Call the `transfer` entrypoint
          */
-        await tzip_12_tutorial_instance.transfer(transferParam);
+        await tzip_12_instance.transfer(transferParam);
         /**
          * Bob's token balance should now be 1
          */
-        const deployedBalanceBob = await storage.get(bob.pkh);
+        const deployedBalanceBob = await storage.get(tokenLookupIdBob);
         const expectedBalanceBob = 1;
         assert.equal(deployedBalanceBob, expectedBalanceBob);
     });
@@ -86,9 +82,9 @@ contract('tzip_12_tutorial', accounts => {
              * Transactions in the test suite are signed by a secret/private key
              * configured in truffle-config.js
              */
-            await tzip_12_tutorial_instance.transfer(transferParam);
+            await tzip_12_instance.transfer(transferParam);
         } catch (e) {
-            assert.equal(e.message, constants.contractErrors.fromEqualToSenderAddress)
+            assert.equal(e.message, constants.contractErrors.transferInvalidPermissions)
         }
     });
 
@@ -104,9 +100,9 @@ contract('tzip_12_tutorial', accounts => {
         ];
 
         try {
-            await tzip_12_tutorial_instance.transfer(transferParam);
+            await tzip_12_instance.transfer(transferParam);
         } catch (e) {
-            assert.equal(e.message, constants.contractErrors.insufficientBalance)
+            assert.equal(e.message, constants.contractErrors.transferInvalidInsufficientBalance)
         }
     });
 
