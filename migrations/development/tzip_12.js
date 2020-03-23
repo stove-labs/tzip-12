@@ -15,10 +15,12 @@ const tokenLookupIdBob = getTokenLookupId(tokenId, bob.pkh);
  * Bob isn't part of the initial storage for testing purposes.
  */
 const initialStorage = {
-    token_balances: new MichelsonMap()
+    token_balances: new MichelsonMap(),
+    u: null
 };
 initialStorage.token_balances.set(tokenLookupIdAlice, tokenBalance);
 
 module.exports = {
-    initialStorage, tokenLookupIdAlice, tokenLookupIdBob, tokenId, tokenBalance
+    initialStorage: async () => initialStorage, 
+    tokenLookupIdAlice, tokenLookupIdBob, tokenId, tokenBalance
 }
