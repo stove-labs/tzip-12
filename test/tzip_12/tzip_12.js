@@ -27,7 +27,6 @@ contract('tzip_12', () => {
          * Get balance for Alice from the smart contract's storage (by a big map lookup id)
          */
         const deployedBalanceAlice = await getTokenBalance(tokenLookupIdAlice, storage);
-        console.log('d', deployedBalanceAlice)
         assert(deployedBalanceAlice.isEqualTo(expectedBalanceAlice));
     });
 
