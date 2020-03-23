@@ -14,8 +14,10 @@ const tokenLookupIdBob = getTokenLookupId(tokenId, bob.pkh);
  * Initialize the storage with Alice owning a certain token balance,
  * Bob isn't part of the initial storage for testing purposes.
  */
-const initialStorage = new MichelsonMap();
-initialStorage.set(tokenLookupIdAlice, tokenBalance);
+const initialStorage = {
+    token_balances: new MichelsonMap()
+};
+initialStorage.token_balances.set(tokenLookupIdAlice, tokenBalance);
 
 module.exports = {
     initialStorage, tokenLookupIdAlice, tokenLookupIdBob, tokenId, tokenBalance

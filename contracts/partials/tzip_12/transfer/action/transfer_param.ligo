@@ -1,4 +1,4 @@
-#include "../storage/storage.ligo"
+#include "../../storage/storage.ligo"
 
 type transfer is record
     token_id : token_id;

@@ -1,4 +1,4 @@
-#include "../../partials/tzip_12/action.ligo"
+#include "../../partials/tzip_12/action/action.ligo"
 #include "../../partials/tzip_12/storage/storage.ligo"
 #include "../../partials/tzip_12/transfer/transfer.ligo"
 
@@ -10,7 +10,6 @@ function main (const action : action; var storage : storage) : (list(operation) 
         The return value of `transfer(...)` is then returned as a result of `main(...)` as well.
      *)
     | Transfer(transfer_param) -> transfer(transfer_param, storage)
-    
     (* This is just a placeholder *)
     | U -> ((nil : list(operation)), storage)
     end)

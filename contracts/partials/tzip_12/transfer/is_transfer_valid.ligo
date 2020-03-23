@@ -1,5 +1,5 @@
 #include "../constants.ligo"
-#include "../storage/get_token_balance.ligo"
+#include "storage/get_token_balance.ligo"
 
 function is_transfer_valid (const transfer : transfer; const storage : storage) : unit
     is begin
