@@ -1,5 +1,6 @@
 #include "get_token_lookup_id.ligo"
 #include "../../constants.ligo"
+#include "storage.ligo"
 (* This getter serves as an abstraction over the current storage structure *)
 (* Return the balance for the provided token_owner/token_id pair *)
 function get_token_balance(const token_owner : token_owner; const token_id : token_id; const storage : storage) : token_balance

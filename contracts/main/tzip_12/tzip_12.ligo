@@ -2,6 +2,7 @@
 #include "../../partials/tzip_12/storage/storage.ligo"
 #include "../../partials/tzip_12/transfer/transfer.ligo"
 #include "../../partials/tzip_12/balance_of/balance_of.ligo"
+#include "../../partials/tzip_12/total_token_supply/total_token_supply.ligo"
 
 (* Default function that represents our contract, it's sole purpose here is the entrypoint routing *)
 function main (const action : action; var storage : storage) : (list(operation) * storage)
@@ -12,4 +13,5 @@ function main (const action : action; var storage : storage) : (list(operation) 
      *)
     | Transfer(transfer_param) -> transfer(transfer_param, storage)
     | Balance_of(balance_of_param) -> balance_of(balance_of_param, storage)
+    | Total_supply(total_token_supply_param) -> total_token_supply(total_token_supply_param, storage)
     end)
