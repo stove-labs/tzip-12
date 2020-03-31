@@ -1,6 +1,7 @@
 const { alice, bob } = require('./../../scripts/sandbox/accounts');
 const { MichelsonMap } = require('@taquito/taquito');
 const { getTokenLookupId } = require('./../../helpers/tokenLookupId');
+const { calculateTotalTokenSupply } = require('./../../helpers/calculateTotalTokenSupply.js');
 
 const tokenBalance = 10;
 const tokenId = 0;
@@ -16,9 +17,15 @@ const tokenLookupIdBob = getTokenLookupId(tokenId, bob.pkh);
  */
 const initialStorage = {
     token_balances: new MichelsonMap(),
-    u: null
+    total_token_supply: new MichelsonMap()
 };
+
 initialStorage.token_balances.set(tokenLookupIdAlice, tokenBalance);
+
+initialStorage.total_token_supply.set(
+    tokenId, 
+    calculateTotalTokenSupply(initialStorage)
+);
 
 module.exports = {
     initialStorage: async () => initialStorage, 

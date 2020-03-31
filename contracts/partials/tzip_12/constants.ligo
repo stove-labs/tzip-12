@@ -3,6 +3,7 @@
     does not have an existing entry in the `token_balances` ledger.
 *)
 const default_balance : nat = 0n;
+const default_total_token_supply : nat = 0n;
 
 (*
     Error codes used for `failwith` contract execution termination.
