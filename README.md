@@ -1,25 +1,30 @@
-# Tezos starter kit
-<img src="https://stove-labs.com/logo_transparent.png" width="100px"/>
+# TZIP-12
 
-## What is the tezos-starter-kit?
+<img src="https://stove-labs.com/logo_transparent.png" width="100px" height="100px"/>
+<div style="display:inline-block;width: 20px;"></div>
+<img src="https://ligolang.org/img/logo.svg" width="100px" height="100px"/>
+<div style="display:inline-block;width: 20px;"></div>
+<img src="https://tqtezos.com/static/images/logo-colored.svg" width="120px" height="100px"/>
+<div style="display:inline-block;width: 20px;"></div>
+<img src="https://tzip-12.stove-labs.com/img/ST_tezosHUNT_light-stack.svg" width="100px" height="100px"/>
+<br/><br/>
 
-The Tezos starter kit provides a *truffle box* with reasonable defaults to kick start your smart contract development experience. It includes a ready to use archive sandbox node with RPC & CORS configured.
+LIGO implementation of the [TZIP-12 Standard](https://gitlab.com/tzip/tzip/-/blob/master/proposals/tzip-12/tzip-12.md) *(FA2)*. You can find a high-level overview of the implementation & usage instructions [at the TZIP-12 website](https://tzip-12.stove-labs.com).
+
+
 
 ## Dependencies
 
 - **Docker** - used to run a local Tezos node together with the LIGO compiler (If you're on linux, follow the post-installation steps as well)
 - **Node.js** - Javascript runtime environment that we'll use for testing and deployment
-- **truffle@tezos** - Testing framework, originally built for Ethereum that now includes support for Tezos. It can be installed by running:
-```
-npm i -g truffle@tezos
-```
+- **LIGO** - High level programming language that compiles to Tezos-native Michelson *(version **926a83f7dfeb09f47cdd14ca7320c77ebd181eb9** or newer)*
 
 ## Getting started
 
 **Unbox the starter kit & install the dependencies**
 ```shell
-$ git clone https://github.com/stove-labs/tezos-starter-kit
-$ cd tezos-starter-kit
+$ git clone https://github.com/stove-labs/tzip-12
+$ cd tzip-12
 $ npm i
 ```
 
@@ -71,3 +76,4 @@ Make sure to [claim a new account at the faucet](https://faucet.tzalpha.net), an
 ```shell
 $ truffle migrate --network carthagenet
 ```
+
