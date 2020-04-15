@@ -6,6 +6,7 @@ const constants = require('../../helpers/constants.js');
 const { alice, bob } = require('../../scripts/sandbox/accounts');
 const { getTokenBalance } = require('../../helpers/storage');
 
+
 contract('tzip_12', () => {
     let storage;
     let tzip_12_instance;

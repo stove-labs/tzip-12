@@ -1,7 +1,7 @@
 type token_operator is address;
 type set_of_unique_token_ids is set(token_id);
 type token_operator_tokens is
-| All_tokens
+| All_tokens of unit
 | Some_tokens of set_of_unique_token_ids;
 
 type token_operator_update_detail is record
