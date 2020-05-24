@@ -1,77 +1,95 @@
-# Tezos starter kit
+# TZIP-12 👨‍🍳
 <img src="https://stove-labs.com/logo_transparent.png" width="100px"/>
 
-## What is the tezos-starter-kit?
+**🚨 This repository has not yet been audited, and should be considered experimental 🚨**
 
-The Tezos starter kit provides a *truffle box* with reasonable defaults to kick start your smart contract development experience. It includes a ready to use archive sandbox node with RPC & CORS configured.
+## Introduction
+This repository contains a set of specific implementations of the TZIP-12 standard. Together with a set of compatible external smart-contracts, tests and benchmarking scripts. Please cook responsibly 👨‍🍳.
 
-## Dependencies
+## Quick start
 
-- **Docker** - used to run a local Tezos node together with the LIGO compiler (If you're on linux, follow the post-installation steps as well)
-- **Node.js** - Javascript runtime environment that we'll use for testing and deployment
-- **truffle@tezos** - Testing framework, originally built for Ethereum that now includes support for Tezos.
-
-## Getting started
-
-**Unbox the starter kit & install the dependencies**
-```shell
-$ git clone https://github.com/stove-labs/tezos-starter-kit
-$ cd tezos-starter-kit
-$ npm i
-```
-
-**Compile the example contract**
-```shell
-$ npm run compile
-```
-
-**Start the local sandbox node**
-```shell
-$ npm run sandbox:start -- carthage
-```
-
-**Migrate the compiled contracts**
-```shell
-$ npm run migrate
-```
-
-**Run the contract tests**
-```shell
-$ npm run test
-```
-
-**Watch project files and recompile/remigrate/retest**
-```shell
-$ npm run compile:watch
-$ npm run migrate:watch
-$ npm run test:watch
-```
-
-## Sandbox management
-
-Archive mode sandbox Tezos node is provided within this box with RPC exposed at port `8732` and with two accounts that are generously funded.
-
-> You can start a sandbox with a specific protocol by passing an additional argument to the sandbox commands, e.g. `babylon` or `carthage`
-
-#### Commands
+> ⚠️ Please refer to the [tezos-starter-kit](https://github.com/stove-labs/tezos-starter-kit#dependencies) project for a list of dependencies required to get started
 
 ```shell
-$ npm run sandbox:start -- carthage
-$ npm run sandbox:kill -- carthage
-$ npm run sandbox:restart -- carthage
+$ git clone https://github.com/stove-labs/tzip-12 my-token
+$ cd my-token && npm install
+$ npm run env:start
+$ npm run migrate 
+$ # Navigate to http://localhost:8000 
+$ # and search for the (multiple) migrated contract address(-es) [KT1..]
 ```
 
-#### Available accounts
-|alias  |pkh  |pk  |sk   |
-|---|---|---|---|
-|alice   |tz1VSUr8wwNhLAzempoch5d6hLRiTh8Cjcjb   |edpkvGfYw3LyB1UcCahKQk4rF2tvbMUk8GFiTuMjL75uGXrpvKXhjn   |edsk3QoqBuvdamxouPhin7swCvkQNgq4jP5KZPbwWNnwdZpSpJiEbq   |
-|bob   |tz1aSkwEot3L2kmUvcoxzjMomb9mvBNuzFK6   |edpkurPsQ8eUApnLUJ9ZPDvu98E8VNj4KtJa1aZr16Cr5ow5VHKnz4   |edsk3RFfvaFaxbHx8BMtEW1rKQcPtDML3LXjNqMNLCzC3wLC1bWbAt   |
+## SDK
 
-## Usage with public testnets (Babylonnet, Carthagenet, ...)
+Part of the TZIP-12 implementation suite is an equivalent Typescript/Javascript SDK, with adapters supporting each individual implementation available. Here's a quick overview of how the SDK can be used:
 
-In order to use your migration scripts with a different network than your local sandbox, you can specify an optional `--network` argument.
+> Please refer to 👉 [it's dedicated repository](https://github.com/stove-labs/tzip-12-sdk) 👈 for more detailed documentation.
 
-Make sure to [claim a new account at the faucet](https://faucet.tzalpha.net), and replace the `faucet.json` file with the new one downloaded previously.
-```shell
-$ npm run migrate -- --network carthagenet
+```typescript
+// Initialize the SDK with an appropriate implementation adapter
+const TZIP12SDK = new TZIP12SDK<StoveLabsPascaligoContractAdapter>({
+    adapterFactory: stoveLabsPascaligoContractAdapterFactory(adapterConfig)
+});
+
+// Originate a new token contract with Alice owning 100 tokens with ID 0
+const alice = 'tz1...';
+const myTokenId = 0;
+const myTokenOrigination = OriginationToken
+    .withId(myTokenId)
+    .setBalanceForOwner(
+        alice,
+        new BigNumber(100)
+    );
+
+const originationOperation = await TZIP12SDK.originate({
+    tokens: [myTokenOrigination]
+});
+
+// Initialize the SDK for a specific TZIP-12 deployment
+const TZIP12 = await TZIP12SDK.at(originationOperation.contractAddress!);
+// Retrieve information for the given token ID
+const myToken = TZIP12.getTokenWithId(0)
+// Alice's balance is 100
+const balanceForAlice = await myToken.getBalanceForOwner(alice)
 ```
+
+
+## Implementation status [1/8]
+|Entrypoint| Status
+|:----|:----|
+|**`transfer`**|✅
+|**`balance_of`**|🚧
+|**`total_supply`**|🚧
+|**`token_metadata`**|🚧
+|**`permissions_descriptor`**|🚧
+|**`update_operators`**|🚧
+|**`is_operator`**|🚧
+|**`set_transfer_hook`**|🚧
+
+## Operational costs
+
+As part of this implementation suite rough estimations on operational costs
+are provided:
+
+|Operation|# of tokens<sup>1</sup>|# of token IDs<sup>1</sup>|# of owners<sup>2</sup>|👇 Generic|👇 NFT|
+|:----|:----|:---|----|----|----|
+|**Origination**|-|-|-|-|-|
+|Basic|100|1|1|**0.07ꜩ**|**0.03ꜩ**|
+|Multiple token IDs|100|2|1|**0.07ꜩ**|**0.03ꜩ**|
+|**Transfer**|-|-|-|-|-|
+|Basic|1|1|2|**0.07ꜩ**|**0.03ꜩ**|
+|**Batch Transfer**|-|-|-|-|-|
+|Basic|10|1|2|**0.07ꜩ**|**0.03ꜩ**|
+|Multiple token IDs|10|2|2|**0.07ꜩ**|**0.03ꜩ**|
+|Multiple recipients|10|1|3|**0.07ꜩ**|**0.03ꜩ**|
+|Multiple token IDs & recipients|10|2|3|**0.07ꜩ**|**0.03ꜩ**|
+
+> Please refer to the [Stove Labs' Kitchen](http://kitchen.stove-labs.com/) 👩‍🍳 for an in-depth overview and explanation of the operational costs.
+
+<sup>1</sup>) Number of total tokens transfered in that operation
+
+<sup>2</sup>) Number of different token owners (addresses) involved in that operation
+
+## Documentation
+
+You can find in depth guides and documentation at the [Stove Labs' Kitchen](http://kitchen.stove-labs.com/) 👩‍🍳.
