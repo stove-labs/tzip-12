@@ -1,5 +1,5 @@
 const { MichelsonMap, UnitValue } = require('@taquito/taquito');
-const tzip12Nft = artifacts.require('tzip-12-nft');
+const tzip12Nft = artifacts.require('tzip-12-nft-big-map');
 const { alice, bob } = require('../scripts/sandbox/accounts');
 const saveContractAddress = require('../helpers/saveContractAddress');
 
@@ -20,6 +20,6 @@ const initialStorage = {
  */
 module.exports = async (deployer) => {
     deployer.deploy(tzip12Nft, initialStorage)
-        .then(({ address }) => saveContractAddress('tzip-12-nft', address));
+        .then(({ address }) => saveContractAddress('tzip-12-nft-big-map', address));
 }
 module.exports.initialStorage = initialStorage;

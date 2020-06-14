@@ -1,1 +1,380 @@
-{"contracts":["tzip-12-nft-no-big-map","tzip-12-nft"],"cases":{"origination":{"Multiple tokens with a single owner_100-undefined-1":{"tzip-12-nft-no-big-map":{"results":{"estimate":{"fee":"13004","storageLimit":"3545","gasLimit":"80516"},"totalCost":3558004,"address":"KT1RGcbjahuy7uWyFVEovnHtDB9o9V84Y28P"},"extras":{"numberOfTokenIDs":100,"numberOfTokens":100,"numberOfOwners":1}},"tzip-12-nft":{"results":{"estimate":{"fee":"13958","storageLimit":"9639","gasLimit":"90052"},"totalCost":9652958,"address":"KT1EHzbsykuupHKbg1wAUh9pwEKNV49aiqxA"},"extras":{"numberOfTokenIDs":100,"numberOfTokens":100,"numberOfOwners":1}}},"Multiple tokens with a single owner_200-undefined-1":{"tzip-12-nft-no-big-map":{"results":{"estimate":{"fee":"24664","storageLimit":"6745","gasLimit":"151116"},"totalCost":6769664,"address":"KT1UbzsLQtvK945XcJQKYFN59FyEAwq2X8hx"},"extras":{"numberOfTokenIDs":200,"numberOfTokens":200,"numberOfOwners":1}},"tzip-12-nft":{"results":{"estimate":{"fee":"26540","storageLimit":"18839","gasLimit":"169877"},"totalCost":18865540,"address":"KT1GncTk6wqiqWP2SRJyZUMDBB8PwkjtyYn8"},"extras":{"numberOfTokenIDs":200,"numberOfTokens":200,"numberOfOwners":1}}},"Multiple tokens with multiple owners_200-undefined-10":{"tzip-12-nft-no-big-map":{"results":{"estimate":{"fee":"24664","storageLimit":"6745","gasLimit":"151116"},"totalCost":6769664,"address":"KT1U3NpLBGjfZxrUg9kJYtS3j3KPNqkrbFYg"},"extras":{"numberOfTokenIDs":200,"numberOfTokens":200,"numberOfOwners":10}},"tzip-12-nft":{"results":{"estimate":{"fee":"26540","storageLimit":"18839","gasLimit":"169877"},"totalCost":18865540,"address":"KT1EwjmhgThbw6J3jvPEyMjjqLEZHb23bu5V"},"extras":{"numberOfTokenIDs":200,"numberOfTokens":200,"numberOfOwners":10}}},"Multiple tokens with multiple owners_350-undefined-1":{"tzip-12-nft-no-big-map":{"results":{"estimate":{"fee":"42394","storageLimit":"11545","gasLimit":"259416"},"totalCost":11587394,"address":"KT1QkUdiSpKuGGJ1V6uSjYuzmf7BebBRDvqA"},"extras":{"numberOfTokenIDs":350,"numberOfTokens":350,"numberOfOwners":1}},"tzip-12-nft":{"results":{"estimate":{"fee":"45654","storageLimit":"32639","gasLimit":"292015"},"totalCost":32684654,"address":"KT1WE51wzHjV9Su2fRTjSv5GWyiFdioG63NT"},"extras":{"numberOfTokenIDs":350,"numberOfTokens":350,"numberOfOwners":1}}}}}}
+{
+	"contracts": [
+		"tzip-12-nft-big-map",
+		"tzip-12-nft-no-big-map"
+	],
+	"cases": {
+		"transfer": {
+			"(100 tokens, 1 owner) | (1 token to 1 new owner)": {
+				"tzip-12-nft-big-map": {
+					"results": {
+						"estimate": {
+							"fee": "3556",
+							"storageLimit": "0",
+							"gasLimit": "31533"
+						},
+						"totalCost": 3556
+					},
+					"extras": {
+						
+					}
+				},
+				"tzip-12-nft-no-big-map": {
+					"results": {
+						"estimate": {
+							"fee": "13514",
+							"storageLimit": "0",
+							"gasLimit": "131114"
+						},
+						"totalCost": 13514
+					},
+					"extras": {
+						
+					}
+				}
+			},
+			"(100 tokens, 1 owner) | (10 tokens to 1 new owner)": {
+				"tzip-12-nft-big-map": {
+					"results": {
+						"estimate": {
+							"fee": "5279",
+							"storageLimit": "0",
+							"gasLimit": "44358"
+						},
+						"totalCost": 5279
+					},
+					"extras": {
+						
+					}
+				},
+				"tzip-12-nft-no-big-map": {
+					"results": {
+						"estimate": {
+							"fee": "14108",
+							"storageLimit": "0",
+							"gasLimit": "132643"
+						},
+						"totalCost": 14108
+					},
+					"extras": {
+						
+					}
+				}
+			},
+			"(100 tokens, 1 owner) | (2 tokens to 1 new owner)": {
+				"tzip-12-nft-big-map": {
+					"results": {
+						"estimate": {
+							"fee": "3747",
+							"storageLimit": "0",
+							"gasLimit": "32958"
+						},
+						"totalCost": 3747
+					},
+					"extras": {
+						
+					}
+				},
+				"tzip-12-nft-no-big-map": {
+					"results": {
+						"estimate": {
+							"fee": "13580",
+							"storageLimit": "0",
+							"gasLimit": "131284"
+						},
+						"totalCost": 13580
+					},
+					"extras": {
+						
+					}
+				}
+			},
+			"(100 tokens, 1 owner) | (6 tokens to 1 new owner)": {
+				"tzip-12-nft-big-map": {
+					"results": {
+						"estimate": {
+							"fee": "4513",
+							"storageLimit": "0",
+							"gasLimit": "38658"
+						},
+						"totalCost": 4513
+					},
+					"extras": {
+						
+					}
+				},
+				"tzip-12-nft-no-big-map": {
+					"results": {
+						"estimate": {
+							"fee": "13844",
+							"storageLimit": "0",
+							"gasLimit": "131964"
+						},
+						"totalCost": 13844
+					},
+					"extras": {
+						
+					}
+				}
+			}
+		},
+		"origination": {
+			"0 tokens, 0 owners": {
+				"tzip-12-nft-no-big-map": {
+					"results": {
+						"estimate": {
+							"fee": "4363",
+							"storageLimit": "1039",
+							"gasLimit": "33168"
+						},
+						"totalCost": 1043363,
+						"address": "KT1C2BLzWRuxNTKXG9yAcYqhqeTTv44orTya"
+					},
+					"extras": {
+						"initialStorage": {
+							"numberOfTokens": 0,
+							"numberOfTokenIDs": 0,
+							"numberOfOwners": 0
+						},
+						"operation": {
+							
+						},
+						"resultingStorage": {
+							
+						}
+					}
+				},
+				"tzip-12-nft-big-map": {
+					"results": {
+						"estimate": {
+							"fee": "4361",
+							"storageLimit": "1069",
+							"gasLimit": "33145"
+						},
+						"totalCost": 1073361,
+						"address": "KT1KdkNzoe4YBsgHCU5m9kXKJLiJAEjJsdgu"
+					},
+					"extras": {
+						"initialStorage": {
+							"numberOfTokens": 0,
+							"numberOfTokenIDs": 0,
+							"numberOfOwners": 0
+						},
+						"operation": {
+							
+						},
+						"resultingStorage": {
+							
+						}
+					}
+				}
+			},
+			"1 token, 1 owner": {
+				"tzip-12-nft-no-big-map": {
+					"results": {
+						"estimate": {
+							"fee": "4467",
+							"storageLimit": "1070",
+							"gasLimit": "33755"
+						},
+						"totalCost": 1074467,
+						"address": "KT1TJyRygpfxvWBXQ6HziHyxCKMyfaFjJYxs"
+					},
+					"extras": {
+						"initialStorage": {
+							"numberOfTokens": 1,
+							"numberOfTokenIDs": 1,
+							"numberOfOwners": 1
+						},
+						"operation": {
+							
+						},
+						"resultingStorage": {
+							
+						}
+					}
+				},
+				"tzip-12-nft-big-map": {
+					"results": {
+						"estimate": {
+							"fee": "4474",
+							"storageLimit": "1161",
+							"gasLimit": "33829"
+						},
+						"totalCost": 1165474,
+						"address": "KT1HdJy7SXoQRLmJJTm7mxuhDxEre89e66Hu"
+					},
+					"extras": {
+						"initialStorage": {
+							"numberOfTokens": 1,
+							"numberOfTokenIDs": 1,
+							"numberOfOwners": 1
+						},
+						"operation": {
+							
+						},
+						"resultingStorage": {
+							
+						}
+					}
+				}
+			},
+			"10 tokens, 1 owner": {
+				"tzip-12-nft-no-big-map": {
+					"results": {
+						"estimate": {
+							"fee": "5443",
+							"storageLimit": "1349",
+							"gasLimit": "39468"
+						},
+						"totalCost": 1354443,
+						"address": "KT1DFryrDxJezokFJzVcHi6mPb1LceBqgAcE"
+					},
+					"extras": {
+						"initialStorage": {
+							"numberOfTokens": 10,
+							"numberOfTokenIDs": 1,
+							"numberOfOwners": 1,
+							"numberOfIDs": 10
+						},
+						"operation": {
+							
+						},
+						"resultingStorage": {
+							
+						}
+					}
+				},
+				"tzip-12-nft-big-map": {
+					"results": {
+						"estimate": {
+							"fee": "5538",
+							"storageLimit": "1989",
+							"gasLimit": "40420"
+						},
+						"totalCost": 1994538,
+						"address": "KT1PYNwQndrtVVzXRKZQBrjS6qBdjsytLY8K"
+					},
+					"extras": {
+						"initialStorage": {
+							"numberOfTokens": 10,
+							"numberOfTokenIDs": 1,
+							"numberOfOwners": 1,
+							"numberOfIDs": 10
+						},
+						"operation": {
+							
+						},
+						"resultingStorage": {
+							
+						}
+					}
+				}
+			},
+			"100 tokens, 1 owner": {
+				"tzip-12-nft-no-big-map": {
+					"results": {
+						"estimate": {
+							"fee": "15621",
+							"storageLimit": "4175",
+							"gasLimit": "100386"
+						},
+						"totalCost": 4190621,
+						"address": "KT1PaeRnPEXDEMPGn3FoHQpn7guuUa9N11GR"
+					},
+					"extras": {
+						"initialStorage": {
+							"numberOfTokens": 100,
+							"numberOfTokenIDs": 1,
+							"numberOfOwners": 1,
+							"numberOfIDs": 100
+						},
+						"operation": {
+							
+						},
+						"resultingStorage": {
+							
+						}
+					}
+				},
+				"tzip-12-nft-big-map": {
+					"results": {
+						"estimate": {
+							"fee": "16575",
+							"storageLimit": "10269",
+							"gasLimit": "109922"
+						},
+						"totalCost": 10285575,
+						"address": "KT1SNrsvuyU9xJJu5LCDxU58vgEKyjKz4bYC"
+					},
+					"extras": {
+						"initialStorage": {
+							"numberOfTokens": 100,
+							"numberOfTokenIDs": 1,
+							"numberOfOwners": 1,
+							"numberOfIDs": 100
+						},
+						"operation": {
+							
+						},
+						"resultingStorage": {
+							
+						}
+					}
+				}
+			},
+			"10 tokens, 10 owners": {
+				"tzip-12-nft-no-big-map": {
+					"results": {
+						"estimate": {
+							"fee": "5443",
+							"storageLimit": "1349",
+							"gasLimit": "39468"
+						},
+						"totalCost": 1354443,
+						"address": "KT1NaYeS7e2zTPd24LQA8fri1KJt8JQaedPT"
+					},
+					"extras": {
+						"initialStorage": {
+							"numberOfTokens": 10,
+							"numberOfTokenIDs": 1,
+							"numberOfOwners": 10,
+							"numberOfIDs": 10
+						},
+						"operation": {
+							
+						},
+						"resultingStorage": {
+							
+						}
+					}
+				},
+				"tzip-12-nft-big-map": {
+					"results": {
+						"estimate": {
+							"fee": "5538",
+							"storageLimit": "1989",
+							"gasLimit": "40420"
+						},
+						"totalCost": 1994538,
+						"address": "KT1HHQgvC1TCfaocJysgXg9GeYL2izA7YfbA"
+					},
+					"extras": {
+						"initialStorage": {
+							"numberOfTokens": 10,
+							"numberOfTokenIDs": 1,
+							"numberOfOwners": 10,
+							"numberOfIDs": 10
+						},
+						"operation": {
+							
+						},
+						"resultingStorage": {
+							
+						}
+					}
+				}
+			}
+		}
+	}
+}

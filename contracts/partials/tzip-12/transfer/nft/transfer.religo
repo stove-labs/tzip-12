@@ -1,4 +1,19 @@
 type transferContentsIteratorAccumulator = (storage, tokenOwner);
+let updateTokenOwners = ((storage, transferContents): (storage, transferContents)): storage => {
+    let tokenOwners = Map.update(
+        // which `token_id` to update
+        transferContents.token_id,
+        // new `tokenOwner` for the `token_id` above
+        Some(transferContents.to_),
+        storage.tokenOwners
+    );
+    let storage = {
+        ...storage,
+        tokenOwners: tokenOwners
+    };
+    storage
+};
+
 let transferContentsIterator = ((accumulator, transferContentsMichelson): (transferContentsIteratorAccumulator, transferContentsMichelson)): transferContentsIteratorAccumulator => {
     let (storage, from_) = accumulator;
     let transferContents: transferContents = Layout.convert_from_right_comb(transferContentsMichelson);
@@ -26,17 +41,7 @@ let transferContentsIterator = ((accumulator, transferContentsMichelson): (trans
     /**
      * Apply the transfer assuming it passed the validation checks above
      */
-    let tokenOwners = Map.update(
-        // which `token_id` to update
-        transferContents.token_id,
-        // new `tokenOwner` for the `token_id` above
-        Some(transferContents.to_),
-        tokenOwners
-    );
-    let storage = {
-        ...storage,
-        tokenOwners: tokenOwners
-    };
+    let storage = updateTokenOwners((storage, transferContents));
     (storage, from_)
 };
 
