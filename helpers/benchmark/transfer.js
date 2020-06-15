@@ -34,7 +34,7 @@ const runTransferBenchmark = async (contractName, benchmarkData) => {
     Object.entries(benchmarkData)
         .forEach(([testGroup, testCases]) => {
             // TODO: introduce dot-notation style test case naming for better benchmark result JSON saving
-            describe(testGroup,async () => {
+            describe(testGroup, async () => {
                 const transfer = transferGroup(testGroup);
                 Object.entries(testCases)
                     .forEach(([testCaseNameStorage, testCaseData]) => {
@@ -49,7 +49,7 @@ const runTransferBenchmark = async (contractName, benchmarkData) => {
                                     describe(combinedTestCaseName, async () => {
 
                                         let contractAddress;
-                                        before(async () => {
+                                        beforeEach(async () => {
                                             /**
                                              * Originate a contract with the predefined storage to run transfers on
                                              */
