@@ -1,18 +1,16 @@
-#include "../parameter.religo"
+#include "parameter.religo"
 
-let defaultTokenBalance: tokenBalance = 1n;
+#if FLAVOUR__NFT
+#include "../transfer/flavours/nft/getTokenBalance.religo"
+#endif
 
 type balanceOfRequestsIteratorAccumulator = (list(balanceOfResponseMichelson), storage);
 let balanceOfRequestsIterator = 
     ((accumulator, balanceOfRequestMichelson): (balanceOfRequestsIteratorAccumulator, balanceOfRequestMichelson)): balanceOfRequestsIteratorAccumulator => {
         let (balanceOfResponses, storage): balanceOfRequestsIteratorAccumulator = accumulator;
         let balanceOfRequest: balanceOfRequest = Layout.convert_from_right_comb(balanceOfRequestMichelson);
-        let tokenOwner: option(tokenOwner) = Map.find_opt(balanceOfRequest.token_id, storage.tokenOwners);
-        let tokenBalance: tokenBalance = switch (tokenOwner) {
-            | None => (failwith(errorTokenUndefined): tokenBalance)
-            | Some(tokenOwner) => defaultTokenBalance
-        };
-        
+        let tokenBalance: tokenBalance = getTokenBalance((balanceOfRequest.token_id, balanceOfRequest.owner, storage));
+
         let balanceOfResponseAuxiliary: balanceOfResponseAuxiliary = {
             request: balanceOfRequestMichelson,
             balance: tokenBalance

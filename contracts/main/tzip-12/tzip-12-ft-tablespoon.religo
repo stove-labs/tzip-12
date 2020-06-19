@@ -1,0 +1,12 @@
+/**
+ * Flavour switches
+ */
+
+#define FLAVOUR__FT
+#define FLAVOUR__FT__STORAGE__BIG_MAP__ENABLED
+#define FLAVOUR__PERMISSION__DEFAULT
+#define FLAVOUR__ENTRYPOINT__BALANCE_OF__ENABLED
+#define FLAVOUR__ENTRYPOINT__PERMISSIONS_DESCRIPTOR__ENABLED
+#define FLAVOUR__ENTRYPOINT__UPDATE_OPERATORS__ENABLED
+
+#include "../../partials/tzip-12/tzip-12-base.religo"

@@ -26,7 +26,7 @@ module.exports = () => {
 
     const tokens0owners0 = {
         initialStorage: {
-            tokenOwners: tokensWithOneOwner(0),
+            tokensLedger: tokensWithOneOwner(0),
             u: UnitValue
         },
         extras: {
@@ -42,7 +42,7 @@ module.exports = () => {
 
     const tokens1owners1 = merge({}, tokens0owners0, {
         initialStorage: {
-            tokenOwners: tokensWithOneOwner(1),
+            tokensLedger: tokensWithOneOwner(1),
         },
         extras: {
             initialStorage: {
@@ -55,7 +55,7 @@ module.exports = () => {
 
     const tokens10owners1 = merge({}, tokens1owners1, {
         initialStorage: {
-            tokenOwners: tokensWithOneOwner(10)
+            tokensLedger: tokensWithOneOwner(10)
         }, 
         extras: {
             initialStorage: {
@@ -67,7 +67,7 @@ module.exports = () => {
 
     const tokens100owners1 = merge({}, tokens1owners1, {
         initialStorage: {
-            tokenOwners: tokensWithOneOwner(100)
+            tokensLedger: tokensWithOneOwner(100)
         }, 
         extras: {
             initialStorage: {
@@ -80,7 +80,7 @@ module.exports = () => {
 
     const tokens10owners10 = merge({}, tokens1owners1, {
         initialStorage: {
-            tokenOwners: tokensWithUniqueOwners(10)
+            tokensLedger: tokensWithUniqueOwners(10)
         }, 
         extras: {
             initialStorage: {

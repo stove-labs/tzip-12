@@ -10,7 +10,7 @@ Tezos.setProvider({
     signer: new InMemorySigner(alice.sk)
 });
 
-contract.only('benchmark', () => {
-    require('./flavors/nft/nft-big-map/nft-big-map');
-    require('./flavors/nft/nft-no-big-map/nft-no-big-map');
+contract('benchmark', () => {
+    // require('./flavors/nft/nft-big-map/nft-big-map');
+    // require('./flavors/nft/nft-no-big-map/nft-no-big-map');
 });
