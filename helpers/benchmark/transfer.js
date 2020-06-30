@@ -85,4 +85,4 @@ const runTransferBenchmark = async (contractName, benchmarkData) => {
         });
 };
 
-module.exports = { runTransferBenchmark };
+module.exports = { runTransferBenchmark, reveal };

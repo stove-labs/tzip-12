@@ -7,5 +7,5 @@ const { runTransferBenchmark } = require('./../../../../../helpers/benchmark/tra
  */
 describe(contractName, async () => {
     // await runOriginationBenchmark(contractName, require('./data/origination')().data);
-    runTransferBenchmark(contractName, require('./data/transfer')().data);
+    // runTransferBenchmark(contractName, require('./data/transfer')().data);
 })

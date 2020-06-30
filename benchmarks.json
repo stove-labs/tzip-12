@@ -280,11 +280,11 @@
 				"tzip-12-nft-big-map": {
 					"results": {
 						"estimate": {
-							"fee": "3556",
+							"fee": "13515",
 							"storageLimit": "0",
-							"gasLimit": "31533"
+							"gasLimit": "131114"
 						},
-						"totalCost": 3556
+						"totalCost": 13515
 					},
 					"extras": {
 						
@@ -308,11 +308,11 @@
 				"tzip-12-nft-big-map": {
 					"results": {
 						"estimate": {
-							"fee": "3747",
+							"fee": "13581",
 							"storageLimit": "0",
-							"gasLimit": "32958"
+							"gasLimit": "131284"
 						},
-						"totalCost": 3747
+						"totalCost": 13581
 					},
 					"extras": {
 						
@@ -336,11 +336,11 @@
 				"tzip-12-nft-big-map": {
 					"results": {
 						"estimate": {
-							"fee": "4513",
+							"fee": "13845",
 							"storageLimit": "0",
-							"gasLimit": "38658"
+							"gasLimit": "131964"
 						},
-						"totalCost": 4513
+						"totalCost": 13845
 					},
 					"extras": {
 						
@@ -364,11 +364,11 @@
 				"tzip-12-nft-big-map": {
 					"results": {
 						"estimate": {
-							"fee": "5279",
+							"fee": "14109",
 							"storageLimit": "0",
-							"gasLimit": "44358"
+							"gasLimit": "132643"
 						},
-						"totalCost": 5279
+						"totalCost": 14109
 					},
 					"extras": {
 						

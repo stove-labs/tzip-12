@@ -1,5 +1,5 @@
 // TODO: figure out what overwrites global `contract` in benchmark tests
-global.contractTruffle = contract;
+global._contract = contract;
 
 const { Tezos } = require('@taquito/taquito');
 const { InMemorySigner } = require('@taquito/signer');
@@ -11,6 +11,6 @@ Tezos.setProvider({
 });
 
 contract('benchmark', () => {
-    // require('./flavors/nft/nft-big-map/nft-big-map');
-    // require('./flavors/nft/nft-no-big-map/nft-no-big-map');
+    require('./flavors/nft/nft-big-map/nft-big-map');
+    require('./flavors/nft/nft-no-big-map/nft-no-big-map');
 });
