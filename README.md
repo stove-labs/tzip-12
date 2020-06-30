@@ -18,7 +18,3 @@ $ npm run migrate
 $ # Navigate to http://localhost:8000 
 $ # and search for the (multiple) migrated contract address(-es) [KT1..]
 ```
-
-## Documentation
-
-You can find in depth guides, documentation and profiling results at the [Stove Labs' Kitchen](http://kitchen.stove-labs.com/docs/solutions/tzip-12/overview) 👩‍🍳.
