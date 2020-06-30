@@ -7,6 +7,7 @@ const initialStorage = {};
 initialStorage.base = {
     tokensLedger: new MichelsonMap,
     tokenOperators: new MichelsonMap,
+    token_metadata: new MichelsonMap,
     u: UnitValue
 };
 

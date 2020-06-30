@@ -71,6 +71,13 @@ type entrypointReturn = (list(operation), storage);
 #endif
 
 /**
+ * Token metadata registry
+ */
+#if FLAVOUR__ENTRYPOINT__TOKEN_METADATA_REGISTRY__ENABLED
+#include "metadata/tokenMetadataRegistry.religo"
+#endif
+
+/**
  * Main
  */
 let main = ((parameter, storage): entrypointParameter): entrypointReturn => {
@@ -96,6 +103,12 @@ let main = ((parameter, storage): entrypointParameter): entrypointReturn => {
          */
 #if FLAVOUR__ENTRYPOINT__UPDATE_OPERATORS__ENABLED
         | Update_operators(updateOperatorsParameter) => updateOperators((updateOperatorsParameter, storage))
+#endif
+        /**
+         * Token metadata registry
+         */
+#if FLAVOUR__ENTRYPOINT__TOKEN_METADATA_REGISTRY__ENABLED
+        | Token_metadata_registry(tokenMetadataRegistryParameter) => tokenMetadataRegistry((tokenMetadataRegistryParameter, storage))
 #endif
         /**
          * Placeholder to generate multiple entrypoints in case of just one actual entrypoint being used

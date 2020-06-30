@@ -14,6 +14,7 @@ const initialStorage = {
     tokenOperators: MichelsonMap.fromLiteral({
         [`${bob.pkh}`]: [alice.pkh]
     }),
+    token_metadata: new MichelsonMap,
     u: UnitValue
 };
 

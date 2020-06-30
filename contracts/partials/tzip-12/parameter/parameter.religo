@@ -9,6 +9,10 @@
 #include "../operators/parameter.religo"
 #endif
 
+#if FLAVOUR__ENTRYPOINT__TOKEN_METADATA_REGISTRY__ENABLED
+#include "../metadata/parameter.religo"
+#endif
+
 type parameter = 
 | Transfer(transferParameter)
 #if FLAVOUR__ENTRYPOINT__BALANCE_OF__ENABLED
@@ -19,6 +23,9 @@ type parameter =
 #endif
 #if FLAVOUR__ENTRYPOINT__UPDATE_OPERATORS__ENABLED
 | Update_operators(updateOperatorsParameter)
+#endif
+#if FLAVOUR__ENTRYPOINT__TOKEN_METADATA_REGISTRY__ENABLED
+| Token_metadata_registry(tokenMetadataRegistryParameter)
 #endif
 | U
 
