@@ -95,7 +95,7 @@ let main = ((parameter, storage): entrypointParameter): entrypointReturn => {
          * Operators
          */
 #if FLAVOUR__ENTRYPOINT__UPDATE_OPERATORS__ENABLED
-        | Update_operators(updateOperatorsParameter) => (([]: list(operation)), storage)
+        | Update_operators(updateOperatorsParameter) => updateOperators((updateOperatorsParameter, storage))
 #endif
         /**
          * Placeholder to generate multiple entrypoints in case of just one actual entrypoint being used
