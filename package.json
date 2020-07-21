@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "devDependencies": {
-    "@stove-labs/tzip-12-sdk": "file:../tzip-12-sdk",
     "@taquito/taquito": "^6.2.0-beta.1",
     "array-chunk": "^1.0.0",
     "array-chunk-equals": "^1.0.1",
