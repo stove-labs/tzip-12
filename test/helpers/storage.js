@@ -8,7 +8,7 @@ const tzip12NFTTableSpoonStorage = async (instance, storage) => {
     const getTokenBalance = async (tokenId, tokenOwner) => {
         let realTokenOwner;
         try {
-            realTokenOwner = await storage.tokensLedger.get(tokenId);
+            realTokenOwner = await storage.tzip12.tokensLedger.get(tokenId);
         } catch (e) {
             console.error(e);
         }
@@ -19,7 +19,7 @@ const tzip12NFTTableSpoonStorage = async (instance, storage) => {
     const getOperators = async (tokenOwner) => {
         let operators;
         try {
-            operators = await storage.tokenOperators.get(tokenOwner);
+            operators = await storage.tzip12.tokenOperators.get(tokenOwner);
         } catch (e) {
             console.error(e);
         }
@@ -38,7 +38,7 @@ const tzip12NFTTableSpoonStorage = async (instance, storage) => {
 const tzip12FTTableSpoonStorage = async (instance, storage) => {
     const getTokenBalance = async (tokenId, tokenOwner) => {
         // TODO: why does taquito return a simple integer instead of a BigNumber here?
-        let balance = (await storage.tokensLedger.get([tokenOwner, tokenId]));
+        let balance = (await storage.tzip12.tokensLedger.get([tokenOwner, tokenId]));
         return balance ? BigNumber(parseInt(balance)) : BigNumber(0)
     }
 

@@ -2,28 +2,13 @@ const { MichelsonMap, UnitValue } = require('@taquito/taquito');
 const tzip12Nft = artifacts.require('tzip-12-nft-tablespoon');
 const { alice, bob } = require('../scripts/sandbox/accounts');
 const saveContractAddress = require('../helpers/saveContractAddress');
-
-/**
- * Initial storage for the NFT implementation flavour
- */
-const initialStorage = {
-    tokensLedger: MichelsonMap.fromLiteral({
-        // tokenId: tokenOwner
-        0: alice.pkh,
-        1: bob.pkh
-    }),
-    tokenOperators: MichelsonMap.fromLiteral({
-        [`${bob.pkh}`]: [alice.pkh]
-    }),
-    token_metadata: new MichelsonMap,
-    u: UnitValue
-};
+const tzip12NFTInitialStorage = require('./initialStorage/tzip-12-nft-big-map');
 
 /**
  * Deploy an NFT-optimized TZIP-12 contract
  */
 module.exports = async (deployer) => {
-    await deployer.deploy(tzip12Nft, initialStorage)
+    await deployer.deploy(tzip12Nft, tzip12NFTInitialStorage.withOperators)
         .then(({ address }) => saveContractAddress('tzip-12-nft-tablespoon', address));
 }
-module.exports.initialStorage = initialStorage;
+module.exports.initialStorage = tzip12NFTInitialStorage.withOperators;

@@ -12,7 +12,7 @@ type transferContentsIteratorAccumulator = (storage, tokenOwner);
 let transferContentsIterator = ((accumulator, transferContentsMichelson): (transferContentsIteratorAccumulator, transferContentsMichelson)): transferContentsIteratorAccumulator => {
     let (storage, from_) = accumulator;
     let transferContents: transferContents = Layout.convert_from_right_comb(transferContentsMichelson);
-    let tokensLedger: tokensLedger = storage.tokensLedger;
+    let tokensLedger: tokensLedger = storage.tzip12.tokensLedger;
     let fromTokenBalance: tokenBalance = getTokenBalance((transferContents.token_id, from_, storage));
 
     canTransfer((from_, transferContents, storage));

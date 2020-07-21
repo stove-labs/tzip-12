@@ -5,7 +5,7 @@ let updateOperators = ((storage, updateOperatorsAddOrRemoveAuxiliary, operatorPa
 
     let tokenOperatorsSet: option(tokenOperatorsSet) = Map.find_opt(
         operatorParameter.owner,
-        storage.tokenOperators
+        storage.tzip12.tokenOperators
     );
     let tokenOperatorsSet: option(tokenOperatorsSet) = switch (updateOperatorsAddOrRemoveAuxiliary) {
         | Add_operator(n) => {
@@ -29,12 +29,15 @@ let updateOperators = ((storage, updateOperatorsAddOrRemoveAuxiliary, operatorPa
     let tokenOperators: tokenOperators = Map.update(
         operatorParameter.owner,
         tokenOperatorsSet,
-        storage.tokenOperators
+        storage.tzip12.tokenOperators
     );
 
     {
         ...storage,
-        tokenOperators: tokenOperators
+        tzip12: {
+            ...storage.tzip12,
+            tokenOperators: tokenOperators
+        }
     }
 }
 

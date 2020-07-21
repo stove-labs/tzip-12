@@ -4,11 +4,14 @@ let updateTokensLedger = ((from, fromTokenBalance, transferContents, storage): (
         transferContents.token_id,
         // new `tokenOwner` for the `token_id` above
         Some(transferContents.to_),
-        storage.tokensLedger
+        storage.tzip12.tokensLedger
     );
     let storage = {
         ...storage,
-        tokensLedger: tokensLedger
+        tzip12: {
+            ...storage.tzip12,
+            tokensLedger: tokensLedger
+        }
     };
     storage
 };

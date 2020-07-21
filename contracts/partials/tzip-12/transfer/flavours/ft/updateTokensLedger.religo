@@ -2,7 +2,7 @@ let updateTokensLedger = ((transferFrom, fromTokenBalance, transferContents, sto
     let tokenId: tokenId = transferContents.token_id;
     let transferTo: tokenOwner = transferContents.to_;
     let transferAmount: tokenAmount = transferContents.amount;
-    let tokensLedger: tokensLedger = storage.tokensLedger;
+    let tokensLedger: tokensLedger = storage.tzip12.tokensLedger;
 
     let tokenLookupIdFrom = (transferFrom, tokenId);
     let tokenLookupIdTo = (transferTo, tokenId);
@@ -21,7 +21,10 @@ let updateTokensLedger = ((transferFrom, fromTokenBalance, transferContents, sto
     );
     let storage = {
         ...storage,
-        tokensLedger: tokensLedger
+        tzip12: {
+            ...storage.tzip12,
+            tokensLedger: tokensLedger
+        }
     };
     storage
 }
