@@ -80,7 +80,7 @@ type entrypointReturn = (list(operation), storage);
 /**
  * TZIP-12
  */
-let tzip12 = ((parameter, storage): (parameterTZIP12, storage)) => {
+let tzip12 = ((parameter, storage): (tzip12Parameter, storage)) => {
         switch (parameter) {
                 /**
                  * Transfer
