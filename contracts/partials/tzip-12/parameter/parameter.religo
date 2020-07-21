@@ -13,7 +13,7 @@
 #include "../metadata/parameter.religo"
 #endif
 
-type parameter = 
+type parameterTZIP12 = 
 | Transfer(transferParameter)
 #if FLAVOUR__ENTRYPOINT__BALANCE_OF__ENABLED
 | Balance_of(balanceOfParameterMichelson)
@@ -29,3 +29,5 @@ type parameter =
 #endif
 | U
 
+type parameter =
+    | TZIP12(parameterTZIP12)

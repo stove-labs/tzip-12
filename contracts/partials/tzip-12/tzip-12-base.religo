@@ -81,40 +81,44 @@ type entrypointReturn = (list(operation), storage);
  * Main
  */
 let main = ((parameter, storage): entrypointParameter): entrypointReturn => {
-    switch (parameter) {
-        /**
-         * Transfer
-         */
-        | Transfer(transferParameter) => transfer((transferParameter, storage))
-        /**
-         * Balance_of
-         */
+        switch (parameter) {
+                | TZIP12(parameter) => {
+                        switch (parameter) {
+                                /**
+                                 * Transfer
+                                 */
+                                | Transfer(transferParameter) => transfer((transferParameter, storage))
+                                /**
+                                 * Balance_of
+                                 */
 #if FLAVOUR__ENTRYPOINT__BALANCE_OF__ENABLED
-        | Balance_of(balanceOfParameterMichelson) => balanceOf((balanceOfParameterMichelson, storage))
+                                | Balance_of(balanceOfParameterMichelson) => balanceOf((balanceOfParameterMichelson, storage))
 #endif
-        /**
-         * Permissions_descriptor
-         */
+                                /**
+                                 * Permissions_descriptor
+                                 */
 #if FLAVOUR__ENTRYPOINT__PERMISSIONS_DESCRIPTOR__ENABLED
-        | Permissions_descriptor(permissionsDescriptorParameter) => permissionsDescriptor((permissionsDescriptorParameter, storage))
+                                | Permissions_descriptor(permissionsDescriptorParameter) => permissionsDescriptor((permissionsDescriptorParameter, storage))
 #endif
-        /**
-         * Operators
-         */
+                                /**
+                                 * Operators
+                                 */
 #if FLAVOUR__ENTRYPOINT__UPDATE_OPERATORS__ENABLED
-        | Update_operators(updateOperatorsParameter) => updateOperators((updateOperatorsParameter, storage))
+                                | Update_operators(updateOperatorsParameter) => updateOperators((updateOperatorsParameter, storage))
 #endif
-        /**
-         * Token metadata registry
-         */
+                                /**
+                                 * Token metadata registry
+                                 */
 #if FLAVOUR__ENTRYPOINT__TOKEN_METADATA_REGISTRY__ENABLED
-        | Token_metadata_registry(tokenMetadataRegistryParameter) => tokenMetadataRegistry((tokenMetadataRegistryParameter, storage))
+                                | Token_metadata_registry(tokenMetadataRegistryParameter) => tokenMetadataRegistry((tokenMetadataRegistryParameter, storage))
 #endif
-        /**
-         * Placeholder to generate multiple entrypoints in case of just one actual entrypoint being used
-         */
-        | U => (([]: list(operation)), storage)
+                                /**
+                                 * Placeholder to generate multiple entrypoints in case of just one actual entrypoint being used
+                                 */
+                                | U => (([]: list(operation)), storage)
 
-    }
+                        }
+                }
+        }
 }
 
