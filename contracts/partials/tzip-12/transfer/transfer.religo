@@ -8,14 +8,14 @@
 #include "flavours/ft/updateTokensLedger.religo"
 #endif
 
-type transferContentsIteratorAccumulator = (storage, tokenOwner);
+type transferContentsIteratorAccumulator = (tzip12Storage, tokenOwner);
 let transferContentsIterator = ((accumulator, transferContentsMichelson): (transferContentsIteratorAccumulator, transferContentsMichelson)): transferContentsIteratorAccumulator => {
-    let (storage, from_) = accumulator;
+    let (tzip12Storage, from_) = accumulator;
     let transferContents: transferContents = Layout.convert_from_right_comb(transferContentsMichelson);
-    let tokensLedger: tokensLedger = storage.tzip12.tokensLedger;
-    let fromTokenBalance: tokenBalance = getTokenBalance((transferContents.token_id, from_, storage));
+    let tokensLedger: tokensLedger = tzip12Storage.tokensLedger;
+    let fromTokenBalance: tokenBalance = getTokenBalance((transferContents.token_id, from_, tzip12Storage));
 
-    canTransfer((from_, transferContents, storage));
+    canTransfer((from_, transferContents, tzip12Storage));
 
     if (fromTokenBalance < transferContents.amount) {
         (failwith(errorInsufficientBalance): transferContentsIteratorAccumulator);
@@ -23,26 +23,26 @@ let transferContentsIterator = ((accumulator, transferContentsMichelson): (trans
         /**
          * Apply the transfer assuming it passed the validation checks above
          */
-        let storage = updateTokensLedger((from_, fromTokenBalance, transferContents, storage));
-        (storage, from_);
+        let tzip12Storage = updateTokensLedger((from_, fromTokenBalance, transferContents, tzip12Storage));
+        (tzip12Storage, from_);
     }
 };
 
-let transferIterator = ((storage, transferMichelson): (storage, transferMichelson)): storage => {
+let transferIterator = ((tzip12Storage, transferMichelson): (tzip12Storage, transferMichelson)): tzip12Storage => {
     let transferAuxiliary: transferAuxiliary = Layout.convert_from_right_comb(transferMichelson);
     let from_: tokenOwner = transferAuxiliary.from_;
     /**
      * Validate each transfer
      */
-    let (storage, _) = List.fold(
+    let (tzip12Storage, _) = List.fold(
         transferContentsIterator, 
         transferAuxiliary.txs,
-        (storage, from_)
+        (tzip12Storage, from_)
     );
-    storage
+    tzip12Storage
 };
 
-let transfer = ((transferParameter, storage): (transferParameter, storage)): entrypointReturn => {
-    let storage = List.fold(transferIterator, transferParameter, storage);
-    (([]: list(operation)), storage);
+let transfer = ((transferParameter, tzip12Storage): (transferParameter, tzip12Storage)): tzip12EntrypointReturn => {
+    let tzip12Storage = List.fold(transferIterator, transferParameter, tzip12Storage);
+    (([]: list(operation)), tzip12Storage);
 };

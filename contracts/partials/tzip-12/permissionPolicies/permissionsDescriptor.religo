@@ -1,4 +1,4 @@
-let permissionsDescriptor = ((permissionsDescriptorParameter, storage): (permissionsDescriptorParameter, storage)): entrypointReturn => {
+let permissionsDescriptor = ((permissionsDescriptorParameter, tzip12Storage): (permissionsDescriptorParameter, tzip12Storage)): tzip12EntrypointReturn => {
     let permissionsDescriptorAuxiliary: permissionsDescriptorAuxiliary = {
         operator: Layout.convert_to_right_comb(currentPermissionsDescriptor.operator),
         receiver: Layout.convert_to_right_comb(currentPermissionsDescriptor.receiver),
@@ -11,5 +11,5 @@ let permissionsDescriptor = ((permissionsDescriptorParameter, storage): (permiss
     };
     let currentPermissionsDescriptorMichelson: permissionsDescriptorMichelson = Layout.convert_to_right_comb(permissionsDescriptorAuxiliary);
     let callbackOperation: operation = Tezos.transaction(currentPermissionsDescriptorMichelson, 0tez, permissionsDescriptorParameter); 
-    ([callbackOperation], storage)
+    ([callbackOperation], tzip12Storage)
 }

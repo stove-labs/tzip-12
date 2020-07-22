@@ -1,12 +1,12 @@
-let updateTokensLedger = ((transferFrom, fromTokenBalance, transferContents, storage): (tokenOwner, tokenBalance, transferContents, storage)): storage => {
+let updateTokensLedger = ((transferFrom, fromTokenBalance, transferContents, tzip12Storage): (tokenOwner, tokenBalance, transferContents, tzip12Storage)): tzip12Storage => {
     let tokenId: tokenId = transferContents.token_id;
     let transferTo: tokenOwner = transferContents.to_;
     let transferAmount: tokenAmount = transferContents.amount;
-    let tokensLedger: tokensLedger = storage.tzip12.tokensLedger;
+    let tokensLedger: tokensLedger = tzip12Storage.tokensLedger;
 
     let tokenLookupIdFrom = (transferFrom, tokenId);
     let tokenLookupIdTo = (transferTo, tokenId);
-    let balanceTo: tokenBalance = getTokenBalance((tokenId, transferTo, storage));
+    let balanceTo: tokenBalance = getTokenBalance((tokenId, transferTo, tzip12Storage));
     // update balance from
     let tokensLedger = Map.update(
         tokenLookupIdFrom,
@@ -19,12 +19,9 @@ let updateTokensLedger = ((transferFrom, fromTokenBalance, transferContents, sto
         Some(balanceTo + transferAmount),
         tokensLedger
     );
-    let storage = {
-        ...storage,
-        tzip12: {
-            ...storage.tzip12,
-            tokensLedger: tokensLedger
-        }
+    let tzip12Storage = {
+        ...tzip12Storage,
+        tokensLedger: tokensLedger
     };
-    storage
+    tzip12Storage
 }

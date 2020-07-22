@@ -12,18 +12,18 @@ let currentPermissionsDescriptor: permissionsDescriptor = {
 let currentOperatorUpdatePermissionPolicy: operatorUpdatePolicy = Owner_update;
 
 // operatorUpdatePolicy = Owner_update
-let canUpdateOperators = ((tokenOwner, storage): (tokenOwner, storage)): unit => {
+let canUpdateOperators = ((tokenOwner, tzip12Storage): (tokenOwner, tzip12Storage)): unit => {
     if (Tezos.sender != tokenOwner) {
         failwith(errorOperatorUpdateDenied)
     } else { (); }
 }
 
 // operatorTransferPolicy = Owner_or_operator_transfer
-let canTransfer = ((from, transferContents, storage): (tokenOwner, transferContents, storage)): unit => {
+let canTransfer = ((from, transferContents, tzip12Storage): (tokenOwner, transferContents, tzip12Storage)): unit => {
     // can transfer own tokens
     if (from != Tezos.sender) {
         // operators can transfer tokens as well
-        if (!isOperator((from, Tezos.sender, storage))) {
+        if (!isOperator((from, Tezos.sender, tzip12Storage))) {
             failwith(errorNotOperator)
         } else { (); }
     } else { (); }

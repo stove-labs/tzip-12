@@ -8,8 +8,8 @@
 let defaultBalance: tokenBalance = 1n;
 let defaultBalanceNoToken: tokenBalance = 0n;
 
-let getTokenBalance = ((tokenId, tokenOwner, storage): (tokenId, tokenOwner, storage)): tokenBalance => {
-    let tokensLedger: tokensLedger = storage.tzip12.tokensLedger;
+let getTokenBalance = ((tokenId, tokenOwner, tzip12Storage): (tokenId, tokenOwner, tzip12Storage)): tokenBalance => {
+    let tokensLedger: tokensLedger = tzip12Storage.tokensLedger;
     let existingTokenOwner: option(tokenOwner) = Map.find_opt(tokenId, tokensLedger);
     switch (existingTokenOwner) {
         | None => (failwith(errorTokenUndefined): tokenBalance)

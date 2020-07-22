@@ -30,4 +30,7 @@ type tzip12Parameter =
 | U
 
 type parameter =
+    /**
+     * Entrypoints are wrapped under a `TZIP12` variant for easier extensibility
+     */
     | TZIP12(tzip12Parameter)

@@ -1,11 +1,11 @@
-let updateOperators = ((storage, updateOperatorsAddOrRemoveAuxiliary, operatorParameterMichelson): (storage, updateOperatorsAddOrRemoveAuxiliary, operatorParameterMichelson)): storage => {
+let updateOperators = ((tzip12Storage, updateOperatorsAddOrRemoveAuxiliary, operatorParameterMichelson): (tzip12Storage, updateOperatorsAddOrRemoveAuxiliary, operatorParameterMichelson)): tzip12Storage => {
     let operatorParameter: operatorParameter = Layout.convert_from_right_comb(operatorParameterMichelson);
 
-    canUpdateOperators((operatorParameter.owner, storage));
+    canUpdateOperators((operatorParameter.owner, tzip12Storage));
 
     let tokenOperatorsSet: option(tokenOperatorsSet) = Map.find_opt(
         operatorParameter.owner,
-        storage.tzip12.tokenOperators
+        tzip12Storage.tokenOperators
     );
     let tokenOperatorsSet: option(tokenOperatorsSet) = switch (updateOperatorsAddOrRemoveAuxiliary) {
         | Add_operator(n) => {
@@ -29,31 +29,28 @@ let updateOperators = ((storage, updateOperatorsAddOrRemoveAuxiliary, operatorPa
     let tokenOperators: tokenOperators = Map.update(
         operatorParameter.owner,
         tokenOperatorsSet,
-        storage.tzip12.tokenOperators
+        tzip12Storage.tokenOperators
     );
 
     {
-        ...storage,
-        tzip12: {
-            ...storage.tzip12,
-            tokenOperators: tokenOperators
-        }
+        ...tzip12Storage,
+        tokenOperators: tokenOperators
     }
 }
 
-let updateOperatorsIterator = ((storage, updateOperatorsAddOrRemoveMichelson): (storage, updateOperatorsAddOrRemoveMichelson)): storage => {
+let updateOperatorsIterator = ((tzip12Storage, updateOperatorsAddOrRemoveMichelson): (tzip12Storage, updateOperatorsAddOrRemoveMichelson)): tzip12Storage => {
     let updateOperatorsAddOrRemoveAuxiliary: updateOperatorsAddOrRemoveAuxiliary = Layout.convert_from_right_comb(updateOperatorsAddOrRemoveMichelson);
     switch (updateOperatorsAddOrRemoveAuxiliary) {
-        | Add_operator(operatorParameterMichelson) => updateOperators((storage, updateOperatorsAddOrRemoveAuxiliary, operatorParameterMichelson));
-        | Remove_operator(operatorParameterMichelson) => updateOperators((storage, updateOperatorsAddOrRemoveAuxiliary, operatorParameterMichelson));
+        | Add_operator(operatorParameterMichelson) => updateOperators((tzip12Storage, updateOperatorsAddOrRemoveAuxiliary, operatorParameterMichelson));
+        | Remove_operator(operatorParameterMichelson) => updateOperators((tzip12Storage, updateOperatorsAddOrRemoveAuxiliary, operatorParameterMichelson));
     }
 }
 
-let updateOperators = ((updateOperatorsParameter, storage): (updateOperatorsParameter, storage)): entrypointReturn => {
-    let storage = List.fold(
+let updateOperators = ((updateOperatorsParameter, tzip12Storage): (updateOperatorsParameter, tzip12Storage)): tzip12EntrypointReturn => {
+    let tzip12Storage = List.fold(
         updateOperatorsIterator,
         updateOperatorsParameter,
-        storage
+        tzip12Storage
     );
-    (([]: list(operation)), storage)
+    (([]: list(operation)), tzip12Storage)
 }

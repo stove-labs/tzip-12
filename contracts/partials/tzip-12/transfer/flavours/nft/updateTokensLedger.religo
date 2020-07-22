@@ -1,17 +1,14 @@
-let updateTokensLedger = ((from, fromTokenBalance, transferContents, storage): (tokenOwner, tokenBalance, transferContents, storage)): storage => {
+let updateTokensLedger = ((from, fromTokenBalance, transferContents, tzip12Storage): (tokenOwner, tokenBalance, transferContents, tzip12Storage)): tzip12Storage => {
     let tokensLedger = Map.update(
         // which `token_id` to update
         transferContents.token_id,
         // new `tokenOwner` for the `token_id` above
         Some(transferContents.to_),
-        storage.tzip12.tokensLedger
+        tzip12Storage.tokensLedger
     );
-    let storage = {
-        ...storage,
-        tzip12: {
-            ...storage.tzip12,
-            tokensLedger: tokensLedger
-        }
+    let tzip12Storage = {
+        ...tzip12Storage,
+        tokensLedger: tokensLedger
     };
-    storage
+    tzip12Storage
 };
