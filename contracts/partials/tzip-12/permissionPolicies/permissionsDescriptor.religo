@@ -9,7 +9,7 @@ let permissionsDescriptor = ((permissionsDescriptorParameter, tzip12Storage): (p
             | None => (None: option(customPermissionPolicyMichelson))
         })
     };
-    let currentPermissionsDescriptorMichelson: permissionsDescriptorMichelson = Layout.convert_to_right_comb(permissionsDescriptorAuxiliary);
+    let currentPermissionsDescriptorMichelson: permissionsDescriptorMichelson = Layout.convert_to_right_comb(permissionsDescriptorAuxiliary: permissionsDescriptorAuxiliary);
     let callbackOperation: operation = Tezos.transaction(currentPermissionsDescriptorMichelson, 0tez, permissionsDescriptorParameter); 
     ([callbackOperation], tzip12Storage)
 }
