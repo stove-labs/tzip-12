@@ -16,7 +16,7 @@ let balanceOfRequestsIterator =
             balance: tokenBalance
         };
 
-        let balanceOfResponseMichelson: balanceOfResponseMichelson = Layout.convert_to_right_comb(balanceOfResponseAuxiliary);
+        let balanceOfResponseMichelson: balanceOfResponseMichelson = Layout.convert_to_right_comb(balanceOfResponseAuxiliary: balanceOfResponseAuxiliary);
         let balanceOfResponses: list(balanceOfResponseMichelson) = [balanceOfResponseMichelson, ...balanceOfResponses];
 
         (balanceOfResponses, tzip12Storage);
