@@ -37,6 +37,10 @@
 #include "permissionPolicies/flavours/default.religo"
 #endif
 
+#if FLAVOUR__PERMISSION__DEFAULT_WITH_MINTING
+#include "permissionPolicies/flavours/defaultWithMinting.religo"
+#endif
+
 /**
  * Parameter
  */
@@ -76,6 +80,12 @@ type tzip12EntrypointReturn = (list(operation), tzip12Storage);
  */
 #if FLAVOUR__ENTRYPOINT__TOKEN_METADATA_REGISTRY__ENABLED
 #include "metadata/tokenMetadataRegistry.religo"
+#endif
+
+
+// Non standard
+#if FLAVOUR__ENTRYPOINT__MINT__ENABLED
+#include "mint/mint.religo"
 #endif
 
 /**
@@ -118,6 +128,15 @@ let tzip12 = ((parameter, tzip12Storage): (tzip12Parameter, tzip12Storage)): tzi
         }
 }
 
+let nonStandard = ((parameter, tzip12Storage): (nonStandardParameter, tzip12Storage)): tzip12EntrypointReturn => {
+        switch(parameter) {
+#if FLAVOUR__ENTRYPOINT__MINT__ENABLED
+                | Mint(mintParameter) => mint((mintParameter, tzip12Storage))
+#endif
+                | UU => (([]: list(operation)), tzip12Storage)
+        }
+}
+
 /**
  * Main
  */
@@ -126,6 +145,13 @@ let main = ((parameter, storage): entrypointParameter): entrypointReturn => {
         switch (parameter) {
                 | TZIP12(tzip12Parameter) => {
                         let (operations, tzip12Storage) = tzip12((tzip12Parameter, tzip12Storage));
+                        (operations, {
+                                ...storage,
+                                tzip12: tzip12Storage
+                        })
+                }
+                | NonStandardParameter(nonStandardParameter) => {
+                        let (operations, tzip12Storage) = nonStandard((nonStandardParameter, tzip12Storage));
                         (operations, {
                                 ...storage,
                                 tzip12: tzip12Storage

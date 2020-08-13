@@ -1,10 +1,12 @@
 #if FLAVOUR__NFT
 #include "flavours/nft/getTokenBalance.religo"
+#include "flavours/nft/setTokenBalance.religo"
 #include "flavours/nft/updateTokensLedger.religo"
 #endif
 
 #if FLAVOUR__FT
 #include "flavours/ft/getTokenBalance.religo"
+#include "flavours/ft/setTokenBalance.religo"
 #include "flavours/ft/updateTokensLedger.religo"
 #endif
 
@@ -23,6 +25,7 @@ let transferContentsIterator = ((accumulator, transferContentsMichelson): (trans
         /**
          * Apply the transfer assuming it passed the validation checks above
          */
+        // TODO: update `updateTokensLedger` with `setTokenBalance` for both ft and nft flavours
         let tzip12Storage = updateTokensLedger((from_, fromTokenBalance, transferContents, tzip12Storage));
         (tzip12Storage, from_);
     }

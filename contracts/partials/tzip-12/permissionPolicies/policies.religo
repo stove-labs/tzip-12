@@ -20,8 +20,18 @@ type permissionsDescriptor = {
     custom: option(customPermissionPolicy)
 }
 
-// non-standard
+/**
+ * Non standard
+ */
 type operatorUpdatePolicy =
 | No_update
 | Owner_update // default
 | Owner_or_operator_update
+
+type tokenMintingPolicy =
+| No_mint // default
+/**
+ * Unrestricted minting exists for testing purposes 
+ * where a lightweight client-side Faucet is present.
+ */
+| Unrestricted_mint

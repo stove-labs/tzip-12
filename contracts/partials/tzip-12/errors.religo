@@ -9,8 +9,9 @@ let errorTransferDenied = "FA2_TX_DENIED";
 // This error may be deprecated depending on how the TZIP-12 spec evolves
 let errorOperatorsUnsupported = "FA2_OPERATORS_UNSUPPORTED";
 let errorNotOperator = "FA2_NOT_OPERATOR";
-let errorOperatorUpdateDenied = "FA2_OPERATOR_UPDATE_DENIED"; // non-standard
-
+// non-standard
+let errorOperatorUpdateDenied = "FA2_OPERATOR_UPDATE_DENIED";
+let errorMintingNotAllowed = "FA2_MINTING_NOT_ALLOWED"
 /**
  * Hooks
  */

@@ -13,6 +13,10 @@
 #include "../metadata/parameter.religo"
 #endif
 
+#if FLAVOUR__ENTRYPOINT__MINT__ENABLED
+#include "../mint/parameter.religo"
+#endif
+
 type tzip12Parameter = 
 | Transfer(transferParameter)
 #if FLAVOUR__ENTRYPOINT__BALANCE_OF__ENABLED
@@ -29,8 +33,17 @@ type tzip12Parameter =
 #endif
 | U
 
+// TODO: pick a better name
+type nonStandardParameter =
+#if FLAVOUR__ENTRYPOINT__MINT__ENABLED
+| Mint(tokenMintParameter)
+#endif
+| UU
+
+
 type parameter =
     /**
      * Entrypoints are wrapped under a `TZIP12` variant for easier extensibility
      */
     | TZIP12(tzip12Parameter)
+    | NonStandardParameter(nonStandardParameter)

@@ -4,21 +4,23 @@ let updateTokensLedger = ((transferFrom, fromTokenBalance, transferContents, tzi
     let transferAmount: tokenAmount = transferContents.amount;
     let tokensLedger: tokensLedger = tzip12Storage.tokensLedger;
 
-    let tokenLookupIdFrom = (transferFrom, tokenId);
-    let tokenLookupIdTo = (transferTo, tokenId);
+    // TODO: obtain balanceFrom here as well rather than from the function arguments
     let balanceTo: tokenBalance = getTokenBalance((tokenId, transferTo, tzip12Storage));
-    // update balance from
-    let tokensLedger = Map.update(
-        tokenLookupIdFrom,
-        Some(abs(fromTokenBalance - transferAmount)),
-        tokensLedger
-    );
-    // update balance to
-    let tokensLedger = Map.update(
-        tokenLookupIdTo,
-        Some(balanceTo + transferAmount),
-        tokensLedger
-    );
+    
+    let tokensLedger = setTokenBalance((
+        tokenId,
+        transferFrom,
+        abs(fromTokenBalance - transferAmount),
+        tzip12Storage
+    ));
+
+    let tokensLedger = setTokenBalance((
+        tokenId,
+        transferTo,
+        balanceTo + transferAmount,
+        tzip12Storage
+    ));
+
     let tzip12Storage = {
         ...tzip12Storage,
         tokensLedger: tokensLedger
