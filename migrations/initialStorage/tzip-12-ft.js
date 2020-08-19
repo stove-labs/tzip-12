@@ -1,8 +1,12 @@
-const { initial } = require("lodash");
-
 const { MichelsonMap, UnitValue } = require('@taquito/taquito');
 const { alice, bob, charlie } = require('../../scripts/sandbox/accounts');
 const initialStorage = {};
+
+/**
+ * The MichelsonMap class of Taquito supports "regular" maps and the bigMap type. They are semantically
+ * the same and that's why it is sufficient for both flavours to use this class. 
+ * The exception is when accessing values, because the get method differs between both types.
+ */
 
 initialStorage.base = {
     tzip12: {

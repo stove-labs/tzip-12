@@ -1,6 +1,6 @@
 const tzip12Nft = artifacts.require('tzip-12-nft-teaspoon');
 const saveContractAddress = require('../helpers/saveContractAddress');
-const tzip12NFTInitialStorage = require('./initialStorage/tzip-12-nft-big-map');
+const tzip12NFTInitialStorage = require('./initialStorage/tzip-12-nft');
 
 /**
  * Deploy an NFT-optimized TZIP-12 contract

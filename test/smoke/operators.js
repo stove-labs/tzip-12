@@ -1,6 +1,6 @@
 const tzip12NFT = artifacts.require('tzip-12-nft-tablespoon');
 
-const tzip12NFTInitialStorage = require('../../migrations/initialStorage/tzip-12-nft-big-map');
+const tzip12NFTInitialStorage = require('../../migrations/initialStorage/tzip-12-nft');
 
 const { alice, bob } = require('../../scripts/sandbox/accounts');
 const { defaultTokenId, tzip12NFTTableSpoonStorage, getOperators, isOperator } = require('../helpers/storage');

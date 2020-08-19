@@ -4,3 +4,4 @@ deployments/
 scripts/tools/**
 !scripts/tools/*.js
 .test*
+.DS_Store
